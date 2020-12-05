@@ -35,7 +35,35 @@
         </table>
       </div> -->
 
-      <ion-grid>
+      <div class="table-responsive" >
+        <table id="example" class="table table-hover table-bordered border-top-0 border-bottom-0" style="width:100%">
+          <thead>
+            <tr class="border-bottom-0">
+              <th scope="col">#</th>
+              <th scope="col" style="text-align: left;">Team Name</th>
+              <th scope="col" style="text-align: left;">Score</th>
+              <th scope="col" style="text-align: left;">Select</th>
+              <!-- <th scope="col">To</th>
+              <th scope="col">Status</th>
+              <th scope="col">View</th> -->
+              <!-- <th scope="col">Action</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let team of teams; index as i">
+              <th scope="col">{{ i + 1 }}</th>
+              <td scope="col">{{team.team_name}}</td>
+              <td scope="col">{{team.score}}</td>
+              <td scope="col"><ion-checkbox color="dark" checked="false" (ionChange)="datachanged($event,team.id,team)" ></ion-checkbox></td>
+              <!-- <td>{{ appli.to}}</td>
+              <td>{{ appli.status}}</td>
+              <td><ion-icon name="eye-outline" (click)="viewApplication(appli.ref)"></ion-icon></td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <ion-grid>
         <ion-row>
           <ion-col>
             Sno
@@ -69,12 +97,12 @@
           </ion-col>
 
           <ion-col>
-            <!-- <ion-checkbox color="light" (click)="selected(i)"></ion-checkbox> -->
+          
             <ion-checkbox color="dark" checked="false" (ionChange)="datachanged($event,team.id,team)" ></ion-checkbox>
           </ion-col>
 
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
 
 
 

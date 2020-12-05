@@ -13,6 +13,7 @@ import firebaseConfig from './firebase';
 import firebase from 'firebase/app';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -21,6 +22,7 @@ firebase.initializeApp(firebaseConfig);
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
+    NgbModule,
     AngularFireAuthModule, AppRoutingModule],
   providers: [
     StatusBar,
