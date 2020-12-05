@@ -164,42 +164,9 @@ export class HomePage implements OnInit{
     }
   }
 
-  // ionViewDidEnter(){
-  //   this.teams = [
-  //     {
-  //       "team_name": "Konklux",
-  //       "wins": 0,
-  //       "losses": 0,
-  //       "ties": 0,
-  //       "score": 0
-  //     },
-  //     {
-  //       "team_name": "Stronghold",
-  //       "wins": 0,
-  //       "losses": 0,
-  //       "ties": 0,
-  //       "score": 0
-  //     },
-  //     {
-  //       "team_name": "Toughjoyfax",
-  //       "wins": 0,
-  //       "losses": 0,
-  //       "ties": 0,
-  //       "score": 0
-  //     }
-  //    ];
-  // }
-
-  // selected(i){
-  //   this.noTeamsSelect += 1;
-  //   this.teamsindex.push(i);
-  //   // console.log(this.noTeamsSelect);
-  //   console.log(this.teamsindex);
-  // }
 
   datachanged(e:any,i,team){
-    // console.log(e);
-    // console.log(e.detail.checked);
+  
     if(e.detail.checked){
         this.teamsindex.push(i);
         this.teamsdetails.push(team);
@@ -259,13 +226,7 @@ export class HomePage implements OnInit{
           this.teams[teamAindex] = teamA;
           this.teams[teamBindex] = teamB;
           console.log(this.teams);
-          // let leaderboard = this.teams;
-          // for(let l=0;l<leaderboard.length;l++){
-          //   this.teams[l] = {
-          //     ...this.teams[l],
-          //     id: l
-          //   }
-          // }
+          
 
           this.loadingCtrl.create({ keyboardClose: true, message: 'Loading Applications' })
             .then(loadinEl => {
