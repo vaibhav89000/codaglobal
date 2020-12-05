@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Assign a winner</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      Team Name
+    </ion-col>
+
+    <ion-col>
+      Score
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      {{selectedApplication[0].team_name}}
+    </ion-col>
+
+    <ion-col>
+      {{selectedApplication[0].score}}
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      {{selectedApplication[1].team_name}}
+    </ion-col>
+
+    <ion-col>
+      {{selectedApplication[1].score}}
+    </ion-col>
+  </ion-row>
+
+
+  <ion-card *ngIf="teamWon">
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col>
+          {{selectedApplication[0].team_name}}
+        </ion-col>
+        <ion-col>
+           {{teamA}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          {{selectedApplication[1].team_name}}
+        </ion-col>
+        <ion-col>
+          {{teamB}}
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-label *ngIf="!scores">
+    Team {{ selectedApplication[0].team_name }}
+  </ion-label>
+  
+  <ion-button color="primary" *ngIf="!scores" (click)="score(0,1)">Wins</ion-button>
+  <ion-button color="danger" *ngIf="!scores" (click)="score(1,2)">Loose</ion-button>
+  <ion-button color="primary" *ngIf="!scores" (click)="score(2,3)">Tie</ion-button>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+      <ion-button color="primary" (click)="Submit()">Submit</ion-button>
+  </ion-toolbar>
+</ion-footer>

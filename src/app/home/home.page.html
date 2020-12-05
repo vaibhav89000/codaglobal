@@ -1,20 +1,87 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Leader Board</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  
+  <ion-card class="card">
+    <ion-card-header>
+      Leader Board
+    </ion-card-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-card-content>
+
+      <!-- <div class="table-responsive" >
+        <table id="example" class="table table-hover table-bordered border-top-0 border-bottom-0" style="width:100%">
+          <thead>
+            <tr class="border-bottom-0">
+              <th scope="row">#</th>
+              <th scope="row">Team Name</th>
+              <th scope="row">Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let appli of teams; index as i">
+              <td scope="row">{{ i + 1 }}</td>
+              <td scope="row">{{ appli.teamName }}</td>
+              <td scope="row">{{ appli.rank }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            Sno
+          </ion-col>
+
+          <ion-col>
+            Team Name
+          </ion-col>
+
+          <ion-col>
+             Score
+          </ion-col>
+
+          <ion-col>
+            Select
+          </ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let team of teams; index as i">
+
+          <ion-col>
+            {{i+1}}
+          </ion-col>
+
+          <ion-col>
+              {{team.team_name}}
+          </ion-col>
+
+          <ion-col>
+            {{team.score}}
+          </ion-col>
+
+          <ion-col>
+            <!-- <ion-checkbox color="light" (click)="selected(i)"></ion-checkbox> -->
+            <ion-checkbox color="dark" checked="false" (ionChange)="datachanged($event,i,team)" ></ion-checkbox>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+
+
+
+    </ion-card-content>
+  </ion-card>
+
+
+
 </ion-content>
+
