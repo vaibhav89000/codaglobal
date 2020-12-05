@@ -16,94 +16,115 @@
 
     <ion-card-content>
 
-      <!-- <div class="table-responsive" >
-        <table id="example" class="table table-hover table-bordered border-top-0 border-bottom-0" style="width:100%">
-          <thead>
-            <tr class="border-bottom-0">
-              <th scope="row">#</th>
-              <th scope="row">Team Name</th>
-              <th scope="row">Rank</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let appli of teams; index as i">
-              <td scope="row">{{ i + 1 }}</td>
-              <td scope="row">{{ appli.teamName }}</td>
-              <td scope="row">{{ appli.rank }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div> -->
+      <ion-card>
+        <ion-card-content>
+          <form [formGroup]="addteam">
+
+                <ion-list>
+                  <ion-item>
+                    <ion-label>
+                      Team Name
+                    </ion-label>
+                    <ion-input formControlName="team_name">
+  
+                    </ion-input>
+                  </ion-item>
+                </ion-list>
+                <ion-button color="primary" (click)="addTeam()">
+                  Add Team
+                </ion-button>
+              
+            </form>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card color="primary">
+        <ion-card-header>
+          Search
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-row>
+            <ion-col offset="2" size="8">
+              <form [formGroup]="searchForm">
+                <div class="row">
+                  <!-- <div col="4"> -->
+                      <select class="custom-select" id="empDepartment" [(ngModel)]="option" formControlName="searchoption">
+                        <option value="0">Team Name</option>
+                        <option value="1">Score</option>
+                      </select>
+                    <!-- </div> -->
+        
+                    <!-- <div class="col-6"> -->
+                      <input type="text" formControlName="searchInput" id="searchid" #searchid class="form-control" [(ngModel)]="searchText" placeholder="Enter ">
+                    <!-- </div> -->
+        
+                  </div>
+                </form>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          Select checkbox to make decision for teams
+        </ion-card-header>
+      </ion-card>
+      
+
+
 
       <div class="table-responsive" >
         <table id="example" class="table table-hover table-bordered border-top-0 border-bottom-0" style="width:100%">
           <thead>
             <tr class="border-bottom-0">
+
+
+              <!-- "team_name": "Konklux",
+    "wins": 0,
+    "losses": 0,
+    "ties": 0,
+    "score": 0
+     -->
               <th scope="col">#</th>
-              <th scope="col" style="text-align: left;">Team Name</th>
-              <th scope="col" style="text-align: left;">Score</th>
+              <th style="text-align: left;" [class.active]="order === 'team_name'"
+                  (click)="setOrder('team_name')" class="capitalize">{{'Team Name'}}
+                  <span [hidden]="reverse">▼</span
+                    ><span [hidden]="!reverse">▲</span>
+                  </th>
+                  <th style="text-align: left;" [class.active]="order === 'score'"
+                  (click)="setOrder('score')" class="capitalize">{{'Score'}}
+                  <span [hidden]="reverse">▼</span
+                    ><span [hidden]="!reverse">▲</span>
+                  </th>
+              <!-- <th scope="col" style="text-align: left;">Team Name</th>
+              <th scope="col" style="text-align: left;">Score</th> -->
               <th scope="col" style="text-align: left;">Select</th>
-              <!-- <th scope="col">To</th>
-              <th scope="col">Status</th>
-              <th scope="col">View</th> -->
-              <!-- <th scope="col">Action</th> -->
+
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let team of teams; index as i">
+            <ng-container *ngIf="Teams$">
+            <tr *ngFor="let team of Teams$| async| orderBy: order:reverse:'case-insensitive'; index as i">
               <th scope="col">{{ i + 1 }}</th>
               <td scope="col">{{team.team_name}}</td>
               <td scope="col">{{team.score}}</td>
               <td scope="col"><ion-checkbox color="dark" checked="false" (ionChange)="datachanged($event,team.id,team)" ></ion-checkbox></td>
-              <!-- <td>{{ appli.to}}</td>
-              <td>{{ appli.status}}</td>
-              <td><ion-icon name="eye-outline" (click)="viewApplication(appli.ref)"></ion-icon></td> -->
+              
             </tr>
+          </ng-container>
           </tbody>
         </table>
+
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refreshpage()" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true">
+          </ngb-pagination>
+       </div>
+
+
       </div>
-
-      <!-- <ion-grid>
-        <ion-row>
-          <ion-col>
-            Sno
-          </ion-col>
-
-          <ion-col>
-            Team Name
-          </ion-col>
-
-          <ion-col>
-             Score
-          </ion-col>
-
-          <ion-col>
-            Select
-          </ion-col>
-        </ion-row>
-
-        <ion-row *ngFor="let team of teams; index as i">
-
-          <ion-col>
-            {{i+1}}
-          </ion-col>
-
-          <ion-col>
-              {{team.team_name}}
-          </ion-col>
-
-          <ion-col>
-            {{team.score}}
-          </ion-col>
-
-          <ion-col>
-          
-            <ion-checkbox color="dark" checked="false" (ionChange)="datachanged($event,team.id,team)" ></ion-checkbox>
-          </ion-col>
-
-        </ion-row>
-      </ion-grid> -->
-
 
 
     </ion-card-content>

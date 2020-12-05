@@ -14,6 +14,7 @@ import firebase from 'firebase/app';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from "ngx-bootstrap/modal";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -22,6 +23,7 @@ firebase.initializeApp(firebaseConfig);
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
+    ModalModule,
     NgbModule,
     AngularFireAuthModule, AppRoutingModule],
   providers: [
