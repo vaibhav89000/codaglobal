@@ -19,6 +19,7 @@ export class WonlooseComponent implements OnInit {
 
   ngOnInit() {
     this.scores = false;
+    console.log(this.selectedApplication);
   }
 
   Submit() {

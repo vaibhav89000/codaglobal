@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
+import { ServiceService } from '../service.service';
 import { WonlooseComponent } from '../wonloose/wonloose.component';
 
 @Component({
@@ -21,6 +22,7 @@ export class HomePage implements OnInit{
     private alert: AlertController,
     private navCtrl: NavController,
     private router: Router,
+    private service: ServiceService,
     private route: ActivatedRoute,
     private modalCtrl: ModalController
   ) {
@@ -32,29 +34,23 @@ export class HomePage implements OnInit{
     // console.log(this.teamsdetails);
     this.teamsindex = [];
     this.teamsdetails = [];
-    this.teams = [
-      {
-        "team_name": "Konklux",
-        "wins": 0,
-        "losses": 0,
-        "ties": 0,
-        "score": 0
-      },
-      {
-        "team_name": "Stronghold",
-        "wins": 0,
-        "losses": 0,
-        "ties": 0,
-        "score": 0
-      },
-      {
-        "team_name": "Toughjoyfax",
-        "wins": 0,
-        "losses": 0,
-        "ties": 0,
-        "score": 0
-      }
-     ];
+    
+    this.fetchLeaderboard();
+  }
+
+  fetchLeaderboard(){
+    this.loadingCtrl.create({ keyboardClose: true, message: 'Loading Scoreboard' })
+            .then(loadingEl => { 
+              loadingEl.present();
+
+              this.service.fetchLeaderboard().then(res => {
+                this.teams = res;
+                loadingEl.dismiss();
+              },err =>{
+                loadingEl.dismiss();
+                console.log(err);
+              })
+             })
   }
 
   // ionViewDidEnter(){
@@ -151,7 +147,27 @@ export class HomePage implements OnInit{
 
           this.teams[teamAindex] = teamA;
           this.teams[teamBindex] = teamB;
-          console.log(this.teams)
+          console.log(this.teams);
+          // let leaderboard = this.teams;
+          // for(let l=0;l<leaderboard.length;l++){
+          //   this.teams[l] = {
+          //     ...this.teams[l],
+          //     id: l
+          //   }
+          // }
+
+          this.loadingCtrl.create({ keyboardClose: true, message: 'Loading Applications' })
+            .then(loadinEl => {
+              loadinEl.present();
+
+              this.service.store(this.teams).then(res => {
+                loadinEl.dismiss();
+                console.log(res);
+              },err => {
+                loadinEl.dismiss();
+                console.log(err);
+              })
+             })
           
         })
 
