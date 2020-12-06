@@ -15,6 +15,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalModule } from "ngx-bootstrap/modal";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -25,7 +27,7 @@ firebase.initializeApp(firebaseConfig);
     AngularFireModule.initializeApp(firebaseConfig),
     ModalModule,
     NgbModule,
-    AngularFireAuthModule, AppRoutingModule],
+    AngularFireAuthModule, AppRoutingModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,
